@@ -85,12 +85,70 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+// let passwordLength = [];
 
-var selectedCharacters = []
-var passwordLength = [];
+// var userChoices = {
+//   passwordLength: 0,
+//   useUppercase: true,
+//   useLowercase: true,
+//   useSpecial: false,
+//   useNumeric: true,
+// }
+
+// function getPasswordOptions() {
+//     let passwordLength = prompt(
+//       'How many characters would you like your password to be?'
+//     );
+//     while (passwordLength < 10 || passwordLength > 64) {
+//       alert('Please choose a password length between 10 and 65 characters.');
+//       passwordLength = prompt(
+//         'How many characters would you like your password to be?');
+//     }
+//     // Ask user which character types they want to use in the password
+//     let useLowercase = confirm('Include lowercase characters in the password?');
+//     let useUppercase = confirm('Include uppercase characters in the password?');
+//     let useNumeric = confirm('Include numeric characters in the password?');
+//     let useSpecial = confirm('Include special characters in the password?');
+//     while (!useLowercase && !useUppercase && !useNumeric && !useSpecial) {
+//       alert('Please choose at least one character type.');
+//       useLowercase = confirm('Include lowercase characters in the password?');
+//       useUppercase = confirm('Include uppercase characters in the password?');
+//       useNumeric = confirm('Include numeric characters in the password?');
+//       useSpecial = confirm('Include special characters in the password?');
+//     }
+// // ADD choices to the userchoices object
+//     if (useLowercase) {
+//       userChoices.useLowercase = true;
+//     } else { userChoices.useLowercase = false;
+//     }
+//     if (useUppercase) {
+//       userChoices.useUppercase = true;
+//     } else { userChoices.useUppercase = false;
+//     }
+//     if (useNumeric) {
+//       userChoices.useNumeric = true;
+//     } else { userChoices.useNumeric = false;
+//     }
+//     if (useSpecial) {
+//       userChoices.useSpecial = true;
+//     } else { userChoices.useSpecial= false;
+//     }
+   
+//         return (userChoices);
+      
+//   }
+
+//   getPasswordOptions();
+
+  
+
+
+
+let selectedCharacters = [];
+let passwordLength;
 
 function getPasswordOptions() {
-  var passwordLength = prompt(
+   passwordLength = prompt(
     'How many characters would you like your password to be?'
   );
   while (passwordLength < 10 || passwordLength > 64) {
@@ -103,7 +161,7 @@ function getPasswordOptions() {
   let useUppercase = confirm('Include uppercase characters in the password?');
   let useNumeric = confirm('Include numeric characters in the password?');
   let useSpecial = confirm('Include special characters in the password?');
-  while (!useLowercase && !useUppercase && !useNumeric && !useSpecial && !useSpecial) {
+  while (!useLowercase && !useUppercase && !useNumeric && !useSpecial) {
     alert('Please choose at least one character type.');
     useLowercase = confirm('Include lowercase characters in the password?');
     useUppercase = confirm('Include uppercase characters in the password?');
@@ -126,34 +184,34 @@ function getPasswordOptions() {
     selectedCharacters = selectedCharacters.concat(specialCharacters);
   }
       return (selectedCharacters);
+    
 }
 
-passwordOptions = getPasswordOptions()
 
-// console.log(passwordOptions);
-// console.log(passwordLength);
+
+
 
 // Generate password
 function generatePassword(arr, num ) {
   let selected = [];
+  console.log(num);
   for (let i = 0; i < num; i++) {
-    let index = Math.floor(Math.random() * arr.length);
+    let index = Math.floor(Math.random() * num);
     selected.push(arr[index]);
     arr.splice(index, 1);
   }
-  return selected;
+  return selected.join("");
 }
 
-// Run password generate function
-// let password = generatePassword(passwordOptions, 50);
-// console.log(password);
+
  
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(passwordOptions, 50);
+  var passwordOptions = getPasswordOptions();
+  var password = generatePassword(passwordOptions, (passwordLength));
   var passwordText = document.querySelector('#password');
   passwordText.value = password;
 }
